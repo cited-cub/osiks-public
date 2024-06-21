@@ -1,23 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  creationTimestamp: "2024-06-21T09:14:35Z"
   labels:
     app.kubernetes.io/instance: osiks-nginx
     run: nginx
   name: nginx
   namespace: osiks-nginx
-  resourceVersion: "3908"
-  uid: ac4180e6-f55f-4a62-8044-a849797d1e29
 spec:
-  clusterIP: 10.96.149.232
-  clusterIPs:
-  - 10.96.149.232
-  externalTrafficPolicy: Cluster
-  internalTrafficPolicy: Cluster
-  ipFamilies:
-  - IPv4
-  ipFamilyPolicy: SingleStack
   ports:
   - nodePort: 30003
     port: 8083
@@ -26,7 +15,4 @@ spec:
   selector:
     app.kubernetes.io/instance: osiks-nginx
     run: nginx
-  sessionAffinity: None
   type: NodePort
-status:
-  loadBalancer: {}
