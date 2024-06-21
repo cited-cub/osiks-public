@@ -5,7 +5,7 @@ metadata:
   labels:
     run: nginx
   name: nginx
-  namespace: nginx
+  namespace: osiks-nginx
 spec:
   containers:
   - image: nginx
@@ -18,4 +18,4 @@ status: {}
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: nginx
+  name: osiks-nginx
