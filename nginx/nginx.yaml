@@ -13,3 +13,8 @@ spec:
   dnsPolicy: ClusterFirst
   restartPolicy: Always
 status: {}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: osiks-public
