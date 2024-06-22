@@ -11,8 +11,16 @@ spec:
   - image: nginx
     name: nginx
     resources: {}
+    volumeMounts:
+    - name: health-vol
+      mountPath: "/usr/share/nginx/html/health.json"
+      subPath: health.json
   dnsPolicy: ClusterFirst
   restartPolicy: Always
+  volumes:
+  - name: health-vol
+    configMap:
+      name: osiks-nginx
 status: {}
 ---
 apiVersion: v1
