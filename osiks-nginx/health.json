@@ -1,0 +1,11 @@
+{
+  "status": "Healthy",
+  "totalDuration": "00:00:00.1039166",
+  "entries": {
+    "base URL": {
+      "data": {},
+      "duration": "00:00:00.0904980",
+      "status": "Healthy",
+      "tags": []
+    }
+}
