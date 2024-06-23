@@ -24,7 +24,15 @@ data:
           "duration": "00:00:00.0904980",
           "status": "Healthy",
           "tags": []
+        },
+        {
+          "name": "database",
+          "data": {},
+          "duration": "00:00:00.0904980",
+          "status": "Unhealthy",
+          "tags": []
         }
+
       ]
     }
 
