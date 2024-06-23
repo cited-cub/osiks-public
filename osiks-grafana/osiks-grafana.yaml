@@ -33,6 +33,9 @@ spec:
         - name: grafana
           image: grafana/grafana:latest
           imagePullPolicy: IfNotPresent
+          env:
+          - name: GF_INSTALL_PLUGINS
+            value: "yesoreyeram-infinity-datasource"
           ports:
             - containerPort: 3000
               name: http-grafana
