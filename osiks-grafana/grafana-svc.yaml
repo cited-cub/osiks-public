@@ -4,7 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/instance: osiks-grafana
     run: grafana
-  name: grafana
+  name: osiks-grafana
   namespace: osiks-grafana
 spec:
   ports:
