@@ -1,6 +1,11 @@
 apiVersion: v1
 data:
   datasources.yaml: |
+    apiVersion: 1
+
+    datasources:
+      - name: Osiks Datasource
+        type: yesoreyeram-infinity-datasource
   plugins.yaml: |
     apiVersion: 1
     
