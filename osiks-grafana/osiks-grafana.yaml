@@ -80,3 +80,8 @@ spec:
     app: grafana
   sessionAffinity: None
   type: LoadBalancer
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: osiks-grafana
