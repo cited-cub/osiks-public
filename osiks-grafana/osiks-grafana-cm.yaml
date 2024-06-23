@@ -146,8 +146,4 @@ data:
     }
 kind: ConfigMap
 metadata:
-  creationTimestamp: "2024-06-23T11:56:58Z"
   name: osiks-grafana-cm
-  namespace: default
-  resourceVersion: "9415"
-  uid: 2ec721f9-1caa-4ed8-9b59-567ffc84b7f6
