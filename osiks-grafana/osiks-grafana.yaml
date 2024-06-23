@@ -76,10 +76,11 @@ spec:
     - port: 3000
       protocol: TCP
       targetPort: http-grafana
+      nodePort: 30004
   selector:
     app: grafana
   sessionAffinity: None
-  type: LoadBalancer
+  type: NodePort
 ---
 apiVersion: v1
 kind: Namespace
