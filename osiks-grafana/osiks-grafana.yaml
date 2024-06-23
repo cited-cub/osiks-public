@@ -63,7 +63,11 @@ spec:
             - mountPath: /var/lib/grafana
               name: grafana-pv
             - name: osiks-grafana-vol
-              mountPath: /etc/grafana/provisioning/dashboards
+              mountPath: /etc/grafana/provisioning/dashboards/dashboards.yaml
+              subPath: dashboards.yaml
+            - name: osiks-grafana-vol
+              mountPath: /var/lib/grafana/dashboards/lab-dashboard.json
+              subPath: lab-dashboard.json
       volumes:
         - name: grafana-pv
           persistentVolumeClaim:
