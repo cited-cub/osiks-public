@@ -13,6 +13,9 @@ spec:
     resources: {}
     volumeMounts:
     - name: health-vol
+      mountPath: "/usr/share/nginx/html/health.mod.json"
+      subPath: health.mod.json
+    - name: health-vol
       mountPath: "/usr/share/nginx/html/health.json"
       subPath: health.json
   dnsPolicy: ClusterFirst

@@ -13,6 +13,21 @@ data:
         }
       }
     }
+  health.mod.json: |
+    {
+      "status": "Healthy",
+      "totalDuration": "00:00:00.1039166",
+      "entries": [
+        {
+          "name": "base URL",
+          "data": {},
+          "duration": "00:00:00.0904980",
+          "status": "Healthy",
+          "tags": []
+        }
+      ]
+    }
+
 kind: ConfigMap
 metadata:
   creationTimestamp: null
