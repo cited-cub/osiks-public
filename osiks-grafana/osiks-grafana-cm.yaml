@@ -5,8 +5,8 @@ data:
     apiVersion: 1
     
     apps:
-    - name: Osiks Infinity
-      type: yesoreyeram-infinity-datasource
+      - name: Osiks Infinity
+        type: yesoreyeram-infinity-datasource
   dashboards.yaml: |
     apiVersion: 1
     
