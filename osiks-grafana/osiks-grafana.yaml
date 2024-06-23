@@ -77,6 +77,9 @@ spec:
             - name: osiks-grafana-vol
               mountPath: /var/lib/grafana/dashboards/lab-dashboard.json
               subPath: lab-dashboard.json
+            - name: osiks-grafana-vol
+              mountPath: /var/lib/grafana/dashboards/health-dashboard.json
+              subPath: health-dashboard.json
       volumes:
         - name: grafana-pv
           persistentVolumeClaim:
