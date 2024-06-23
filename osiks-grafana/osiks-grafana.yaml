@@ -66,6 +66,9 @@ spec:
             - mountPath: /var/lib/grafana
               name: grafana-pv
             - name: osiks-grafana-vol
+              mountPath: /etc/grafana/provisioning/plugins/plugins.yaml
+              subPath: plugins.yaml
+            - name: osiks-grafana-vol
               mountPath: /etc/grafana/provisioning/dashboards/dashboards.yaml
               subPath: dashboards.yaml
             - name: osiks-grafana-vol
