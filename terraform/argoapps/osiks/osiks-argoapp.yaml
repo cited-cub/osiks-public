@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: osiks-nginx
+  namespace: argocd
+spec:
+  destination:
+    namespace: osiks-nginx
+    server: https://kubernetes.default.svc
+  project: osiks-public
+  source:
+    path: applications/osiks
+    repoURL: https://github.com/cited-cub/osiks-public.git
+    targetRevision: HEAD
