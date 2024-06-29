@@ -1,0 +1,3 @@
+Inspiration:
+https://github.com/hashicorp/terraform/issues/29729
+https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/functions/manifest_decode_multi
