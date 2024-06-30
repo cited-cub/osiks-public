@@ -75,7 +75,7 @@ resource "kind_cluster" "default" {
   }
 }
 
-resource "cilium" "lab" {
+resource "cilium" "default" {
   depends_on = [kind_cluster.default]
 
   set = [
@@ -90,7 +90,7 @@ resource "cilium" "lab" {
 }
 
 resource "helm_release" "argocd" {
-  depends_on = [cilium.lab]
+  depends_on = [cilium.default]
   name = "argocd"
 
   repository       = "https://argoproj.github.io/argo-helm"
