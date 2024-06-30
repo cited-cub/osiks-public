@@ -10,6 +10,11 @@ resource "kind_cluster" "default" {
 
     node {
       role = "control_plane"
+
+      kubeadm_config_patches = [
+        "kind: InitConfiguration\nnodeRegistration:\n  kubeletExtraArgs:\n    node-labels: \"ingress-ready=true\"\n"
+      ]
+
       extra_port_mappings {
         container_port = 80
         host_port      = 80
@@ -84,27 +89,8 @@ resource "cilium" "lab" {
   version = "1.15.6"
 }
 
-#resource "kubernetes_namespace" "argocd" {
-#  depends_on = [cilium.lab]
-#
-#  lifecycle {
-#    ignore_changes = [metadata]
-#  }
-#
-#  metadata {
-#    name = "argocd"
-#  }
-#}
-
-#resource "time_sleep" "wait_30_seconds" {
-#  depends_on = [kubernetes_namespace.argocd]
-#
-#  destroy_duration = "30s"
-#}
-
 resource "helm_release" "argocd" {
   depends_on = [cilium.lab]
-#  depends_on = [time_sleep.wait_30_seconds]
   name = "argocd"
 
   repository       = "https://argoproj.github.io/argo-helm"
@@ -116,36 +102,4 @@ resource "helm_release" "argocd" {
   values = [file("argocd.yaml")]
 }
 
-#data "kubernetes_secret" "argopass" {
-#  metadata {
-#    name = "argocd-initial-admin-secret"
-#    namespace = "argocd"
-#  }
-#  binary_data = {
-#    "password" = ""
-#  }
-#}
-#
-#resource "argocd_project" "osiks-public" {
-#  metadata {
-#    name        = "osiks-public"
-#    namespace   = "argocd"
-#  }
-#
-#  spec {
-#    cluster_resource_whitelist {
-#      group = "*"
-#      kind = "*"
-#    }
-#    destination {
-#      name = "*"
-#      namespace = "*"
-#      server = "*"
-#    }
-#    namespace_resource_whitelist {
-#      group = "*"
-#      kind = "*"
-#    }
-#    source_repos = ["*"]
-#  }
-#}
+

@@ -371,3 +371,73 @@ resource "kubernetes_job" "ingress-nginx-admission-create" {
     }
   }
 }
+
+resource "kubernetes_job" "ingress-nginx-admission-patch" {
+  metadata {
+    labels = {
+      "app.kubernetes.io/component" = "admission-webhook"
+      "app.kubernetes.io/instance"  = "ingress-nginx"
+      "app.kubernetes.io/name"      = "ingress-nginx"
+      "app.kubernetes.io/part-of"   = "ingress-nginx"
+      "app.kubernetes.io/version"   = "1.10.1"
+    }
+    name      = "ingress-nginx-admission-patch"
+    namespace = "ingress-nginx"
+  }
+  spec {
+    template {
+      metadata {
+        labels = {
+          "app.kubernetes.io/component" = "admission-webhook"
+          "app.kubernetes.io/instance"  = "ingress-nginx"
+          "app.kubernetes.io/name"      = "ingress-nginx"
+          "app.kubernetes.io/part-of"   = "ingress-nginx"
+          "app.kubernetes.io/version"   = "1.10.1"
+        }
+        name = "ingress-nginx-admission-patch"
+      }
+      spec {
+        container {
+          args = [
+            "patch",
+            "--webhook-name=ingress-nginx-admission",
+            "--namespace=$(POD_NAMESPACE)",
+            "--patch-mutating=false",
+            "--secret-name=ingress-nginx-admission",
+            "--patch-failure-policy=Fail"
+          ]
+          env {
+            name = "POD_NAMESPACE"
+            value_from {
+              field_ref {
+                field_path = "metadata.namespace"
+              }
+            }
+          }
+          image             = "registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.4.1@sha256:36d05b4077fb8e3d13663702fa337f124675ba8667cbd949c03a8e8ea6fa4366"
+          image_pull_policy = "IfNotPresent"
+          name              = "patcpatchh"
+          security_context {
+            allow_privilege_escalation = false
+            capabilities {
+              drop = [
+                "ALL"
+              ]
+            }
+            read_only_root_filesystem = true
+            run_as_non_root           = true
+            run_as_user               = 65532
+            seccomp_profile {
+              type = "RuntimeDefault"
+            }
+          }
+        }
+        node_selector = {
+          "kubernetes.io/os" = "linux"
+        }
+        restart_policy       = "OnFailure"
+        service_account_name = "ingress-nginx-admission"
+      }
+    }
+  }
+}
