@@ -55,6 +55,36 @@ resource "kind_cluster" "default" {
         listen_address  = "127.0.0.1"
         protocol       = "TCP"
       }
+      extra_port_mappings {
+        container_port = 30006
+        host_port      = 30006
+        listen_address  = "127.0.0.1"
+        protocol       = "TCP"
+      }
+      extra_port_mappings {
+        container_port = 30007
+        host_port      = 30007
+        listen_address  = "127.0.0.1"
+        protocol       = "TCP"
+      }
+      extra_port_mappings {
+        container_port = 30008
+        host_port      = 30008
+        listen_address  = "127.0.0.1"
+        protocol       = "TCP"
+      }
+      extra_port_mappings {
+        container_port = 30009
+        host_port      = 30009
+        listen_address  = "127.0.0.1"
+        protocol       = "TCP"
+      }
+      extra_port_mappings {
+        container_port = 30010
+        host_port      = 30010
+        listen_address  = "127.0.0.1"
+        protocol       = "TCP"
+      }
     }
 
     node {
