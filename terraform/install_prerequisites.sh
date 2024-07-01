@@ -10,3 +10,6 @@ brew install helm
 
 # Install kubectl
 brew install kubectl
+
+# Install kind
+brew install kind
