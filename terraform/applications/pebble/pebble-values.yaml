@@ -5,5 +5,6 @@ coredns:
   # Pebble is installed
   corefileSegment: |-
     template ANY ANY test {
-      answer "{{ .Name }} 60 IN CNAME nginx.{$PEBBLE_NAMESPACE}.svc.cluster.local"
+      #answer "{{ .Name }} 60 IN CNAME nginx.{$PEBBLE_NAMESPACE}.svc.cluster.local"
+      answer "{{ .Name }} 60 IN CNAME kuard.kuard.svc.cluster.local"
     }

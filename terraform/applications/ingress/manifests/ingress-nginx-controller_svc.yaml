@@ -19,6 +19,7 @@ spec:
     port: 80
     protocol: TCP
     targetPort: http
+    nodePort: 30006
   - appProtocol: https
     name: https
     port: 443

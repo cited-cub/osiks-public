@@ -40,6 +40,12 @@ terraform init
 terraform apply -auto-approve
 cd -
 
+# Deploy cert-manager
+cd applications/cert-manager
+terraform init
+terraform apply -auto-approve
+cd -
+
 # Set kube config file
 export KUBECONFIG=${PWD}/.kube/config
 
