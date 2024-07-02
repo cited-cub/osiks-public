@@ -22,6 +22,24 @@ terraform init
 terraform apply -auto-approve
 cd -
 
+# Deploy DNSUtils pod
+cd applications/dnsutils
+terraform init
+terraform apply -auto-approve
+cd -
+
+# Deploy kuard
+cd applications/kuard
+terraform init
+terraform apply -auto-approve
+cd -
+
+# Deploy Pebble
+cd applications/pebble
+terraform init
+terraform apply -auto-approve
+cd -
+
 # Set kube config file
 export KUBECONFIG=${PWD}/.kube/config
 
