@@ -33,3 +33,11 @@ resource "kubernetes_manifest" "kuard" {
 
   manifest = each.value
 }
+
+resource "kubernetes_manifest" "kuard_issuer" {
+  manifest = provider::kubernetes::manifest_decode(file("manifests/kuard_issuer.yaml"))
+}
+
+resource "kubernetes_manifest" "pebble_cm" {
+  manifest = provider::kubernetes::manifest_decode(file("manifests/pebble_cm.yaml"))
+}

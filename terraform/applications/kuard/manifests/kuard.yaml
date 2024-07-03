@@ -19,6 +19,14 @@ spec:
         name: kuard
         ports:
         - containerPort: 8080
+        volumeMounts:
+          - name: pebble-configmap
+            subPath: root-cert.pem
+            mountPath: /etc/pebble/root-cert.pem
+      volumes:
+        - name: pebble-configmap
+          configMap:
+            name: pebble
 ---
 apiVersion: v1
 kind: Service
@@ -40,8 +48,8 @@ kind: Ingress
 metadata:
   name: kuard
   namespace: kuard
-  annotations: {}
-    #cert-manager.io/issuer: "letsencrypt-staging"
+  annotations: 
+    cert-manager.io/issuer: "letsencrypt-staging"
 spec:
   ingressClassName: nginx
 #  tls:
