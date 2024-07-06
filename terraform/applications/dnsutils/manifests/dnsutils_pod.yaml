@@ -12,7 +12,7 @@ spec:
       - "infinity"
     imagePullPolicy: IfNotPresent
   restartPolicy: Always
-  dnsConfig:
-    nameservers:
-      - 10.96.14.14
-  dnsPolicy: None
+#  dnsConfig:
+#    nameservers:
+#      - 10.96.14.14
+#  dnsPolicy: None

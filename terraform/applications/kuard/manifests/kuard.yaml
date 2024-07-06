@@ -49,17 +49,15 @@ metadata:
   name: kuard
   namespace: kuard
   annotations: 
-    cert-manager.io/issuer: "letsencrypt-staging"
+    cert-manager.io/issuer: "pebble-issuer"
 spec:
   ingressClassName: nginx
-#  tls:
-#  - hosts:
-#    #- example.example.com
-#    - localhost
-#    secretName: quickstart-example-tls
+  tls:
+  - hosts:
+    - kuard
+    secretName: quickstart-example-tls
   rules:
-  #- host: localhost
-  - host: test
+  - host: kuard
     http:
       paths:
       - path: /

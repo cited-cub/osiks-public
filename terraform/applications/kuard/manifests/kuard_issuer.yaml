@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: pebble
+  name: pebble-issuer
   namespace: kuard
 spec:
   acme:
@@ -12,9 +12,10 @@ spec:
     email: user@example.com
     # Name of secret used to store the ACME account private key
     privateKeySecretRef:
-      name: letsencrypt-staging
+      name: pebble
     # Enable the HTTP-01 challenge provider
     solvers:
       - http01:
           ingress:
             ingressClassName: nginx
+    skipTLSVerify: true

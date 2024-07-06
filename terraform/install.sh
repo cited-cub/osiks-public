@@ -5,7 +5,7 @@ terraform init
 terraform apply -auto-approve
 
 # Deploy ingress
-cd applications/ingress
+cd applications/ingress-controller
 terraform init
 terraform apply -auto-approve
 cd -

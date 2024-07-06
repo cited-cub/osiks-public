@@ -119,17 +119,15 @@ resource "cilium" "default" {
   version = "1.15.6"
 }
 
-resource "helm_release" "argocd" {
-  depends_on = [cilium.default]
-  name = "argocd"
-
-  repository       = "https://argoproj.github.io/argo-helm"
-  chart            = "argo-cd"
-  namespace        = "argocd"
-  create_namespace = true
-  version          = "7.3.0"
-
-  values = [file("argocd.yaml")]
-}
-
-
+#resource "helm_release" "argocd" {
+#  depends_on = [cilium.default]
+#  name = "argocd"
+#
+#  repository       = "https://argoproj.github.io/argo-helm"
+#  chart            = "argo-cd"
+#  namespace        = "argocd"
+#  create_namespace = true
+#  version          = "7.3.0"
+#
+#  values = [file("argocd.yaml")]
+#}

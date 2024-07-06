@@ -19,12 +19,17 @@ resource "kubernetes_namespace" "kuard" {
   }
 }
 
+resource "kubernetes_manifest" "kuard_issuer" {
+  depends_on = [kubernetes_namespace.kuard]
+  manifest = provider::kubernetes::manifest_decode(file("manifests/kuard_issuer.yaml"))
+}
+
 locals {
   resources = provider::kubernetes::manifest_decode_multi(file("manifests/kuard.yaml"))
 }
 
 resource "kubernetes_manifest" "kuard" {
-  depends_on = [kubernetes_namespace.kuard]
+  depends_on = [kubernetes_manifest.kuard_issuer]
 
   for_each = {
     for manifest in local.resources:
@@ -32,10 +37,6 @@ resource "kubernetes_manifest" "kuard" {
   }
 
   manifest = each.value
-}
-
-resource "kubernetes_manifest" "kuard_issuer" {
-  manifest = provider::kubernetes::manifest_decode(file("manifests/kuard_issuer.yaml"))
 }
 
 resource "kubernetes_manifest" "pebble_cm" {

@@ -5,7 +5,7 @@ data:
       errors
       health
       ready
-      template ANY ANY test {
+      template ANY ANY kuard {
         answer "{{ .Name }} 60 IN CNAME nginx.{$PEBBLE_NAMESPACE}.svc.cluster.local"
       }
       forward . /etc/resolv.conf
