@@ -1,0 +1,61 @@
+terraform {
+  required_version = ">= 1.8.0"
+
+  required_providers {
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = ">= 2.28.0"
+    }
+  }
+}
+
+provider "kubernetes" {
+  config_path = "../../.kube/config"
+}
+
+resource "kubernetes_namespace" "nginx" {
+  metadata {
+    name = "nginx"
+  }
+}
+
+resource "kubernetes_manifest" "pebble_issuer" {
+  depends_on = [kubernetes_namespace.nginx]
+    
+  manifest = provider::kubernetes::manifest_decode(file("pebble_issuer.yaml"))
+}
+
+locals {
+  resources = provider::kubernetes::manifest_decode_multi(file("nginx.yaml"))
+}
+
+resource "kubernetes_manifest" "nginx" {
+  depends_on = [kubernetes_manifest.pebble_issuer]
+
+  for_each = {
+    for manifest in local.resources :
+    "${manifest.kind}--${manifest.metadata.name}" => manifest
+  }
+
+  manifest = each.value
+}
+
+data "kubernetes_service" "ingress-nginx-controller" {
+  metadata {
+    name = "ingress-nginx-controller"
+    namespace = "ingress-nginx"
+  }
+}
+
+#data "external" "coredns_patch" {
+#  program = ["bash", "${path.module}/patch-coredns.sh"]
+#}
+
+#resource "terraform_data" "patch_coredns" {
+#  triggers_replace = plantimestamp()
+#
+#  provisioner "local-exec" {
+##    command = "kubectl -n kube-system patch cm coredns --patch-file ./coredns_patch.yaml"
+#    command = "k -n kube-system patch cm coredns -p '{"data":{"Corefile":".:53 {\n    errors\n    health {\n       lameduck 5s\n    }\n    ready\n    kubernetes cluster.local in-addr.arpa ip6.arpa {\n       pods insecure\n       fallthrough in-addr.arpa ip6.arpa\n       ttl 30\n    }\n    prometheus :9153\n    forward . /etc/resolv.conf {\n       max_concurrent 1000\n    }\n    cache 30\n    loop\n    reload\n    loadbalance\n}\nosiks.local {\n   hosts {\n     ${data.kubernetes_service.inigress-nginx-controller.spec.clusterIP} osiks.local\n     fallthrough\n   }\n   whoami\n}\n"}}'"
+#  }
+#}

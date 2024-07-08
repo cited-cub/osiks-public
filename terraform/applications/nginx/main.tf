@@ -13,29 +13,10 @@ provider "kubernetes" {
   config_path = "../../.kube/config"
 }
 
-resource "kubernetes_namespace" "nginx" {
-  metadata {
-    name = "nginx"
+resource "terraform_data" "patch_coredns" {
+  triggers_replace = plantimestamp()
+
+  provisioner "local-exec" {
+    command = "cat <<EOF > new-cm.yaml\nkind: ConfigMap\nmetadata:\n  name: coredns\n  namespace: kube-system\napiVersion: v1\ndata:\n  Corefile: |\n    .:53 {\n        errors\n        health {\n           lameduck 5s\n        }\n        ready\n        kubernetes cluster.local in-addr.arpa ip6.arpa {\n           pods insecure\n           fallthrough in-addr.arpa ip6.arpa\n           ttl 30\n        }\n        prometheus :9153\n        forward . 1.1.1.1\n        cache 30\n        loop\n        reload\n        loadbalance\n    }\n    example.example.com {\n       hosts {\n         $(kubectl get svc ingress-nginx-controller --no-headers -n ingress-nginx | awk '{print$3}') example.example.com\n         fallthrough\n       }\n       whoami\n    }\nEOF"
   }
-}
-
-resource "kubernetes_manifest" "pebble_issuer" {
-  depends_on = [kubernetes_namespace.nginx]
-    
-  manifest = provider::kubernetes::manifest_decode(file("pebble_issuer.yaml"))
-}
-
-locals {
-  resources = provider::kubernetes::manifest_decode_multi(file("nginx.yaml"))
-}
-
-resource "kubernetes_manifest" "nginx" {
-  depends_on = [kubernetes_manifest.pebble_issuer]
-
-  for_each = {
-    for manifest in local.resources :
-    "${manifest.kind}--${manifest.metadata.name}" => manifest
-  }
-
-  manifest = each.value
 }
