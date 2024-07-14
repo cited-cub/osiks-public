@@ -1,0 +1,61 @@
+Command to check HTTP-01 challenge of www.example.com on service created by cert-manager (from a pod in default namespace):
+curl -k -H 'Host: www.example.com' cm-acme-http-solver-6fzkf:8089/.well-known/acme-challenge/RM5O9dvulwN6mi5BlJpK-gpk3KBANlQnrdNOlr-b7qw
+
+(from outside the cluster):
+curl -k -H 'Host: www.example.com' localhost:30009/.well-known/acme-challenge/RM5O9dvulwN6mi5BlJpK-gpk3KBANlQnrdNOlr-b7qw
+
+(from browser outside the cluster):
+www.example.com:30009/.well-known/acme-challenge/RM5O9dvulwN6mi5BlJpK-gpk3KBANlQnrdNOlr-b7qw
+The path can be found in the cm-acme-http-solver-872bq ingress
+
+
+Command to check HTTP-01 challenge of www.example.com on ingress created by cert-manager (from a pod in default namespace):
+curl -k -H 'Host: example.com' cm-acme-http-solver-vwq9c:8089/.well-known/acme-challenge/Hoy8T_akYSD3bxUZnI3-hBHINmB4_fetjZJ5p7XQpQc
+
+(from outside the cluster):
+curl -k -H 'Host: example.com' localhost:30009/.well-known/acme-challenge/Hoy8T_akYSD3bxUZnI3-hBHINmB4_fetjZJ5p7XQpQc
+
+(from browser outside the cluster):
+http://example.com:30009/.well-known/acme-challenge/Hoy8T_akYSD3bxUZnI3-hBHINmB4_fetjZJ5p7XQpQc
+
+
+Accessing the nginx-lab index page:
+- From within the nginx-lab.default.pod to loopback interface:
+curl localhost
+- From within the nginx-lab.default.pod to pod ClusterIP address:
+curl 10.244.1.50
+- From within the nginx-lab.default.pod to nginx-lab service ClusterIP address:
+curl 10.96.228.144
+- From within the nginx-lab.default.pod to ingress-nginx-controller pod ClusterIP address:
+curl 10.244.1.32/
+- From within the nginx-lab.default.pod to ingress-nginx-controller service ClusterIP address:
+curl 10.96.34.188/
+- From within the nginx-lab.default.pod to ingress-nginx-controller DNS name:
+curl ingress-nginx-controller.ingress-nginx
+- From host to ingress-nginx-controller nodeport using loopback interface:
+curl localhost:30009
+- From host to ingress-nginx-controller nodeport using DNS name from hosts file:
+curl example.com:30009
+
+Looking up the IP address of example.com:
+- From within the dnsutils.default.pod using pebble-coredns.pebble.pod's ClusterIP:
+dig @10.244.2.89 example.com (FAIL)
+- From within th dnsutils.default.pod using pebble-coredns.pebble.svc's ClusterIP:
+dig @10.96.211.175 example.com
+
+Accessing pebble ACME server:
+- From within nginx-lab.default.pod:
+curl -k https://pebble.pebble/dir
+
+Accessing challenge example.com-1-632379087-2958704168 endpoint:
+- From nginx-lab.default.pod to cm-acme-http-solver-95rqb.default.pod using ClusterIP address:
+curl -H 'Host: www.example.com' 10.244.1.166:8089/.well-known/acme-challenge/VKCW7TZb6NptGOq2X-Wmuy7ZDR1PDsP8XAXuoBfHTcM
+- From nginx-lab.default.pod to cm-acme-http-solver-95rqb.default.pod via service ClusterIP address:
+curl -H 'Host: www.example.com' 10.96.192.142:8089/.well-known/acme-challenge/VKCW7TZb6NptGOq2X-Wmuy7ZDR1PDsP8XAXuoBfHTcM
+- From nginx-lab.default.pod to cm-acme-http-solver-95rqb.default.pod via service DNS name:
+curl -H 'Host: www.example.com' cm-acme-http-solver-64hwq:8089/.well-known/acme-challenge/VKCW7TZb6NptGOq2X-Wmuy7ZDR1PDsP8XAXuoBfHTcM
+- From nginx-lab.default.pod to cm-acme-http-solver-95rqb.default.pod via ingress cm-acme-http-solver-8bnwn ClusterIP address:
+curl -H 'Host: www.example.com' 10.96.34.188/.well-known/acme-challenge/VKCW7TZb6NptGOq2X-Wmuy7ZDR1PDsP8XAXuoBfHTcM
+- From nginx-lab.default.pod to cm-acme-http-solver-95rqb.default.pod via ingress cm-acme-http-solver-8bnwn DNS name:
+curl -H 'Host: www.example.com' ingress-nginx-controller.ingress-nginx.svc/.well-known/acme-challenge/VKCW7TZb6NptGOq2X-Wmuy7ZDR1PDsP8XAXuoBfHTcM
+

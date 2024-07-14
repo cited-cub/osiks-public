@@ -1,13 +1,13 @@
 # Pebble's Helm chart configuration (pebble-values.yaml)
 coredns:
-  enabled: false
+  enabled: true
   # make all DNS lookups to "test" and subdomains go to the
   # Kubernetes service named mysvc in the same namespaces as
   # Pebble is installed
-#  corefileSegment: |-
-#    template ANY ANY osiks.local {
-#      answer "{{ .Name }} 60 IN CNAME ingress-nginx-controller.ingress-nginx.svc.cluster.local"
-#    }
+  corefileSegment: |-
+    template ANY ANY osiks.local {
+      answer "{{ .Name }} 60 IN CNAME ingress-nginx-controller.ingress-nginx.svc.cluster.local"
+    }
 
 #pebble:
 #  env:

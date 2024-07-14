@@ -13,5 +13,6 @@ resource "helm_release" "pebble" {
   create_namespace = true
   version          = "1.1.0"
 
-  values = [file("pebble-values.yaml")]
+  #values = [file("./applications/pebble/pebble-values.yaml")]
+  values = [file("./pebble-values.yaml")]
 }

@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: nginx-default
+  name: nginx-default
+  namespace: default
+spec:
+  containers:
+  - image: nginx
+    name: nginx-default
+#  dnsPolicy: "None"
+#  dnsConfig:
+#    nameservers:
+#      - 10.244.2.105
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: nginx-default
+  name: nginx-default
+  namespace: default
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 30008
+  selector:
+    run: nginx-default
+  type: NodePort

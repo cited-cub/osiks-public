@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: osiks.local
+  namespace: default
+spec:
+  secretName: osiks-local-tls
+  issuerRef:
+    name: pebble
+  commonName: osiks.local
+  dnsNames:
+    - osiks.local

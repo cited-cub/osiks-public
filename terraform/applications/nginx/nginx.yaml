@@ -32,7 +32,7 @@ kind: Ingress
 metadata:
   name: nginx
   annotations:
-    cert-manager.io/issuer: pebble
+    cert-manager.io/cluster-issuer: pebble
   namespace: nginx
 spec:
   ingressClassName: nginx
@@ -51,3 +51,20 @@ spec:
                 name: nginx
                 port:
                   number: 80
+---
+#apiVersion: cert-manager.io/v1
+#kind: Issuer
+#metadata:
+#  name: pebble
+#  namespace: nginx
+#spec:
+#  acme:
+#    skipTLSVerify: true
+#    email: user-nginx@osiks.com
+#    server: https://pebble.pebble/dir
+#    privateKeySecretRef:
+#      name: pebble-account-private-key
+#    solvers:
+#      - http01:
+#          ingress:
+#            ingressClassName: nginx
