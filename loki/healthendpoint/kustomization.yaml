@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ups-lab-pod.yaml
+  - ups-lab-ingress.yaml
+  - ups-lab-svc.yaml
+  - ups-lab-cm.yaml

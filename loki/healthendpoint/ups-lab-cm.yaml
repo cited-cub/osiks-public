@@ -1,0 +1,338 @@
+apiVersion: v1
+data:
+  service-0_health.json: |-
+    {
+      "name": "Service 0",
+      "status": "Healthy",
+      "entries": []
+    }
+  service-1_health.json: |-
+    {
+      "name": "Service 1",
+      "status": "Healthy",
+      "entries": [
+        {
+          "name": "Database",
+          "status": "Degraded",
+          "description": null,
+          "exception": null,
+          "data": {
+            "retry": 0,
+            "responseTime (ms)": 0
+          }
+        },
+        {
+          "name": "Redis",
+          "status": "Unhealthy",
+          "description": null,
+          "exception": null,
+          "data": { }
+        },
+        {
+          "name": "SignalR heartbeat",
+          "status": "Healthy",
+          "description": "Recent SignalR heartbeat received",
+          "exception": null,
+          "data": {
+            "abc-backend-84dc686645-75mn7": "2024-08-14T13:16:41.5956598+00:00",
+            "default": "2024-08-14T07:29:01.5562034+00:00",
+            "abc-backend-84dc686645-rd5w8": "2024-08-14T13:15:59.6094687+00:00",
+            "abc-backend-84dc686645-rwwc7": "2024-08-14T13:16:21.8467511+00:00"
+          }
+        },
+        {
+          "name": "ScheduleSubscription",
+          "status": "Healthy",
+          "description": "Started",
+          "exception": null,
+          "data": { }
+        },
+        {
+          "name": "ScheduleAPI",
+          "status": "Healthy",
+          "description": "OK",
+          "exception": null,
+          "data": {
+            "responseTime (ms)": 8
+          }
+        },
+        {
+          "name": "PRAdminAPI",
+          "status": "Healthy",
+          "description": "OK",
+          "exception": null,
+          "data": {
+            "responseTime (ms)": 2
+          }
+        },
+        {
+          "name": "masstransit-bus",
+          "status": "Healthy",
+          "description": "Ready",
+          "exception": null,
+          "data": {
+            "Endpoints": {
+              "rabbitmqs://prod.rabbitmq.sr.se/abc-production?autodelete=true": {
+                "status": "Healthy",
+                "description": "ready"
+              },
+              "rabbitmqs://prod.rabbitmq.sr.se/abcbackend84dc68664575mn7_ABCBackend_bus_yryyyyyfcyjj3tjabdqmacsdgj?temporary=true": {
+                "status": "Healthy",
+                "description": "ready (not started)"
+              }
+            }
+          }
+        },
+        {
+          "name": "elasticsearch",
+          "status": "Healthy",
+          "description": null,
+          "exception": null,
+          "data": { }
+        }
+      ]
+    }
+  service-2_health.json: |-
+    {
+      "name": "Service 2",
+      "status": "Degraded",
+      "entries": [
+        {
+          "name": "Database",
+          "status": "Degraded",
+          "description": null,
+          "exception": null,
+          "data": {
+            "retry": 0,
+            "responseTime (ms)": 0
+          }
+        },
+        {
+          "name": "Web Server",
+          "status": "Unhealthy",
+          "description": null,
+          "exception": null,
+          "data": { }
+        }
+      ]
+    }
+  service-3_health.json: |-
+    {
+      "name": "Service 3",
+      "status": "Unhealthy",
+      "entries": [
+        {
+          "name": "Database",
+          "status": "Degraded",
+          "description": null,
+          "exception": null,
+          "data": {
+            "retry": 0,
+            "responseTime (ms)": 0
+          }
+        },
+        {
+          "name": "Redis",
+          "status": "Unhealthy",
+          "description": null,
+          "exception": null,
+          "data": { }
+        },
+        {
+          "name": "SignalR heartbeat",
+          "status": "Healthy",
+          "description": "Recent SignalR heartbeat received",
+          "exception": null,
+          "data": {
+            "abc-backend-84dc686645-75mn7": "2024-08-14T13:16:41.5956598+00:00",
+            "default": "2024-08-14T07:29:01.5562034+00:00",
+            "abc-backend-84dc686645-rd5w8": "2024-08-14T13:15:59.6094687+00:00",
+            "abc-backend-84dc686645-rwwc7": "2024-08-14T13:16:21.8467511+00:00"
+          }
+        },
+        {
+          "name": "ScheduleSubscription",
+          "status": "Healthy",
+          "description": "Started",
+          "exception": null,
+          "data": { }
+        }
+      ]
+    }
+  live_data.json: |-
+    {"requires_reboot": 0,
+    "current_date": "29 May 14:12 CEST 2024",
+    "vin1":    232,
+    "vin2": "-",
+    "vin3": "-",
+    "fin":    499,
+    "ain1": "-",
+    "ain2": "-",
+    "ain3": "-",
+    "vbyp1":    232,
+    "vbyp2": "-",
+    "vbyp3": "-",
+    "fbyp":    499,
+    "abyp1":      0,
+    "abyp2": "-",
+    "abyp3": "-",
+    "vout1":    231,
+    "vout2": "-",
+    "vout3": "-",
+    "fout":    500,
+    "aout1":     10,
+    "aout2": "-",
+    "aout3": "-",
+    "apkout1":      0,
+    "apkout2": "-",
+    "apkout3": "-",
+    "w1":         217,
+    "w2":           0,
+    "w3":           0,
+    "load1":          11,
+    "load2": "-",
+    "load3": "-",
+    "vbat":    817,
+    "abat":      0,
+    "authonomy":     47,
+    "batcap":    60,
+    "KWh":      0,
+    "tsys":     21,
+    "tbat":      0,
+    "tbatext":      0,
+    "output powered": true,
+    "line present": true,
+    "system_status": {
+            "status": "Load On Inverter            ",
+    "status_color": "#00aef0",
+    "input_color": "#00aef0",
+    "bypass_color": "#00aef0",
+    "system_color": "#00aef0",
+    "battery_color": "#00aef0",
+    "output_color": "#00aef0",
+    "sinottico": 5},
+     "alarms": [
+    ],
+     "sensors": [
+    ]}
+  lab-health.mod.json: |-
+    {
+      "status": "Healthy",
+      "totalDuration": "00:00:01.2345678",
+      "entries": [
+        {
+          "name": "database",
+          "status": "Healthy",
+          "duration": "00:00:00.1234567",
+          "description": "Database connection is healthy.",
+          "data": {},
+          "exception": null,
+          "tags": ["database", "critical"]
+        },
+        {
+          "name": "diskSpace",
+          "status": "Degraded",
+          "duration": "00:00:00.2345678",
+          "description": "Disk space is running low.",
+          "data": {
+            "availableFreeSpace": "1.2GB",
+            "totalFreeSpace": "5GB"
+          },
+          "exception": null,
+          "tags": ["disk", "non-critical"]
+        },
+        {
+          "name": "apiEndpoint",
+          "status": "Unhealthy",
+          "duration": "00:00:00.3456789",
+          "description": "API endpoint is not responding.",
+          "data": {},
+          "exception": "System.TimeoutException: The operation has timed out.",
+          "tags": ["api", "critical"]
+        }
+      ]
+    }
+  lab-health2.mod.json: |-
+    {
+      "status": "Degraded",
+      "totalDuration": "00:00:01.2345678",
+      "entries": [
+        {
+          "name": "database",
+          "status": "Degraded",
+          "duration": "00:00:00.1234567",
+          "description": "Database connection is healthy.",
+          "data": {},
+          "exception": null,
+          "tags": ["database", "critical"]
+        },
+        {
+          "name": "diskSpace",
+          "status": "Degraded",
+          "duration": "00:00:00.2345678",
+          "description": "Disk space is running low.",
+          "data": {
+            "availableFreeSpace": "1.2GB",
+            "totalFreeSpace": "5GB"
+          },
+          "exception": null,
+          "tags": ["disk", "non-critical"]
+        },
+        {
+          "name": "apiEndpoint",
+          "status": "Unhealthy",
+          "duration": "00:00:00.3456789",
+          "description": "API endpoint is not responding.",
+          "data": {},
+          "exception": "System.TimeoutException: The operation has timed out.",
+          "tags": ["api", "critical"]
+        },
+        {
+          "name": "Identity Provider",
+          "status": "Unhealthy",
+          "duration": "00:00:05.0000000",
+          "description": "Database not responding.",
+          "data": {},
+          "exception": "System.Exception: The network connection has timed out.",
+          "tags": ["IDP", "critical"]
+        }
+      ]
+    }
+  lab-health.json: |-
+    {
+      "status": "Healthy",
+      "totalDuration": "00:00:01.2345678",
+      "entries": {
+        "database": {
+          "status": "Healthy",
+          "duration": "00:00:00.1234567",
+          "description": "Database connection is healthy.",
+          "data": {},
+          "exception": null,
+          "tags": ["database", "critical"]
+        },
+        "diskSpace": {
+          "status": "Degraded",
+          "duration": "00:00:00.2345678",
+          "description": "Disk space is running low.",
+          "data": {
+            "availableFreeSpace": "1.2GB",
+            "totalFreeSpace": "5GB"
+          },
+          "exception": null,
+          "tags": ["disk", "non-critical"]
+        },
+        "apiEndpoint": {
+          "status": "Unhealthy",
+          "duration": "00:00:00.3456789",
+          "description": "API endpoint is not responding.",
+          "data": {},
+          "exception": "System.TimeoutException: The operation has timed out.",
+          "tags": ["api", "critical"]
+        }
+      }
+    }
+kind: ConfigMap
+metadata:
+  name: ups-lab-cm
+  namespace: he

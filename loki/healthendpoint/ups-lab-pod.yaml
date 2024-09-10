@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: ups-lab-nginx
+  name: ups-lab-nginx
+  namespace: he
+spec:
+  containers:
+  - image: nginxinc/nginx-unprivileged:1.26-alpine
+    name: ups-lab-nginx
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      runAsNonRoot: true
+      seccompProfile:
+        type: RuntimeDefault
+    ports:
+    - containerPort: 8080
+    volumeMounts:
+    - mountPath: /usr/share/nginx/html
+      name: ups-status-vol
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+  volumes:
+  - name: ups-status-vol
+    configMap:
+      name: ups-lab-cm
+      items:
+      - key: live_data.json
+        path: live_data.json
+      - key: lab-health.mod.json
+        path: lab-health.mod.json
+      - key: lab-health2.mod.json
+        path: lab-health2.mod.json
+      - key: lab-health.json
+        path: lab-health.json
+      - key: service-0_health.json
+        path: service-0_health.json
+      - key: service-1_health.json
+        path: service-1_health.json
+      - key: service-2_health.json
+        path: service-2_health.json
+      - key: service-3_health.json
+        path: service-3_health.json

@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ups-lab
+spec:
+  tls:
+    - hosts:
+        - ups-lab.dev02-ext.k8s.sr.se
+  rules:
+    - host: ups-lab.dev02-ext.k8s.sr.se
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ups-lab-nginx
+                port:
+                  number: 8080
