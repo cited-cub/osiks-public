@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: host
+  name: host
+spec:
+  externalName: host.docker.internal
+  selector:
+    app: host
+  type: ExternalName
+status:
+  loadBalancer: {}
