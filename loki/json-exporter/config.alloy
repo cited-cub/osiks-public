@@ -1,0 +1,88 @@
+logging {
+	level  = "info"
+	format = "logfmt"
+}
+
+prometheus.remote_write "default" {
+  endpoint {
+    url = "http://mimir-nginx.mimir-test.svc:80/api/v1/push"
+  }
+}
+
+discovery.relabel "default" {
+  targets = [{
+    __address__ = "http://host:8000/examples/data.json",
+  }]  
+
+  rule {
+    source_labels = ["__address__"]
+    target_label  = "__param_target"
+  }
+
+  rule {
+    source_labels = ["__param_target"]
+    target_label  = "instance"
+  }
+
+  rule {
+    target_label = "__address__"
+    replacement  = "json-exporter-prometheus-json-exporter.default.svc:7979"
+  }
+}
+
+prometheus.scrape "default" {
+  targets    = discovery.relabel.default.output
+  forward_to = [prometheus.remote_write.default.receiver]
+  job_name   = "default"
+  params     = {
+    module = ["default"],
+  }
+  metrics_path = "/probe"
+}
+
+discovery.relabel "animals" {
+  targets = [{
+    __address__ = "http://host:8000/examples/animal-data.json",
+  }]
+
+  rule {
+    source_labels = ["__address__"]
+    target_label  = "__param_target"
+  }
+
+  rule {
+    source_labels = ["__param_target"]
+    target_label  = "instance"
+  }
+
+  rule {
+    target_label = "__address__"
+    replacement  = "json-exporter-prometheus-json-exporter.default.svc:7979"
+  }
+}
+
+prometheus.scrape "animals" {
+  targets    = discovery.relabel.animals.output
+  forward_to = [prometheus.remote_write.default.receiver]
+  job_name   = "animals"
+  params     = {
+    module = ["animals"],
+  }
+  metrics_path = "/probe"
+}
+
+prometheus.scrape "prometheus" {
+  targets = [{
+    __address__ = "prometheus.default.svc:9090",
+  }]  
+  forward_to = [prometheus.remote_write.default.receiver]
+  job_name   = "prometheus"
+}
+
+prometheus.scrape "json_exporter" {
+  targets = [{
+    __address__ = "json-exporter-prometheus-json-exporter.default.svc:7979",
+  }]  
+  forward_to = [prometheus.remote_write.default.receiver]
+  job_name   = "json_exporter"
+}
