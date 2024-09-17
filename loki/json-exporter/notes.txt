@@ -2,9 +2,6 @@ kind create cluster --config kind-config.yaml
 python3 -m http.server 8000 &
 kubectl apply -f host_svc.yaml
 helm install json-exporter prometheus-community/prometheus-json-exporter --values json-exporter-values.yaml
-# kubectl apply -f prometheus_cm.yaml
-# kubectl apply -f prometheus_pod.yaml
-# kubectl apply -f prometheus_svc.yaml
 kubectl create namespace mimir-test
 helm install -n mimir-test mimir grafana/mimir-distributed
 kubectl create namespace alloy
