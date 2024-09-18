@@ -101,7 +101,11 @@ alloy:
     extra: []
 
   # -- Security context to apply to the Grafana Alloy container.
-  securityContext: {}
+  securityContext:
+    runAsUser: 473
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
 
   # -- Resource requests and limits to apply to the Grafana Alloy container.
   resources: {}
@@ -157,7 +161,11 @@ configReloader:
       cpu: "1m"
       memory: "5Mi"
   # -- Security context to apply to the Grafana configReloader container.
-  securityContext: {}
+  securityContext:
+    runAsUser: 65534
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
 
 controller:
   # -- Type of controller to use for deploying Grafana Alloy in the cluster.
