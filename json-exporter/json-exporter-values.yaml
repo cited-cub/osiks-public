@@ -167,6 +167,19 @@ configuration:
             predator: '{ .predator }'
           values:
             population: '{ .population }'
+      abc:
+        metrics:
+        - name: abc
+          type: object
+          help: This is the ABC health endpoint module
+          path: '{.entries[?(@.status == "Healthy")]}'
+          labels: 
+            entry: '{.name}'
+          values:
+            active: 1
+        http_client_config:
+          tls_config:
+            insecure_skip_verify: true
 
         # If 'body' is set, it will be sent by the exporter as the body content in the scrape request. The HTTP method will also be set as 'POST' in this case.
         # body:
